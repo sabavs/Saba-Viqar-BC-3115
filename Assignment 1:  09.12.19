@@ -1,0 +1,33 @@
+/*Starting code for Assignment 1
+Student: Saba Viqar
+CISC 3115
+Brooklyn College */
+
+import java.util.Scanner;
+
+public class Bankofbc {
+	public static void main(String[] arg){
+		int pin = 98765;
+		int attempt = 0;
+		int maxattempt = 4;
+		
+		Scanner keyboard = new Scanner(System.in);
+
+		System.out.println("Welcome to the bank of BC.");
+		System.out.print("Enter your pin: ");
+		int enterpin = keyboard.nextInt();
+		System.out.println();
+		attempt++;
+
+		while (enterpin != pin && attempt < maxattempt) {
+			System.out.print("Incorrect pin. Enter your pin: ");
+			enterpin = keyboard.nextInt();
+			attempt++;
+		}
+		
+		if (enterpin == pin)
+			System.out.println("Your pin is correct.");
+		else if (attempt == maxattempt)
+			System.out.println("You have exceeded your allowed attemps. Account locked.");
+	}
+}
