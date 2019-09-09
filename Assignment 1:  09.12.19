@@ -28,6 +28,6 @@ public class Bankofbc {
 		if (enterpin == pin)
 			System.out.println("Your pin is correct.");
 		else if (attempt == maxattempt)
-			System.out.println("You have exceeded your allowed attemps. Account locked.");
+			System.out.println("You have exceeded your allowed attempts. Account locked.");
 	}
 }
