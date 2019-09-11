@@ -7,27 +7,29 @@ import java.util.Scanner;
 
 public class Bankofbc {
 	public static void main(String[] arg){
-		int pin = 98765;
+		int pin = 12345;
 		int attempt = 0;
 		int maxattempt = 4;
 		
 		Scanner keyboard = new Scanner(System.in);
 
-		System.out.println("Welcome to the bank of BC.");
-		System.out.print("Enter your pin: ");
+		System.out.println("WELCOME TO THE BANK OF BC.");
+		System.out.print("ENTER YOUR PIN: ");
 		int enterpin = keyboard.nextInt();
 		System.out.println();
 		attempt++;
 
 		while (enterpin != pin && attempt < maxattempt) {
-			System.out.print("Incorrect pin. Enter your pin: ");
+			System.out.println("INCORRECT PIN. TRY AGAIN.");
+			System.out.print("ENTER YOUR PIN: ");
 			enterpin = keyboard.nextInt();
+			System.out.println();
 			attempt++;
 		}
 		
 		if (enterpin == pin)
-			System.out.println("Your pin is correct.");
+			System.out.println("YOUR PIN IS CORRECT.");
 		else if (attempt == maxattempt)
-			System.out.println("You have exceeded your allowed attempts. Account locked.");
+			System.out.println("YOU HAVE EXCEEDED YOUR ALLOWED ATTEMPTS. ACCOUNT LOCKED");
 	}
 }
