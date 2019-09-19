@@ -12,7 +12,7 @@ class Pet {
 	}
 	
 // Setters     
-      public void setAnimal(String newanimal ){
+      public void setAnimal(String newanimal) {
 		this.animal = newanimal;
 	}
       
