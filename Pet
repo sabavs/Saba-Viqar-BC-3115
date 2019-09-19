@@ -1,27 +1,29 @@
 class Pet {
 
-	String animal;
-	String name;
-	int age;
+	private String animal;
+	private String name;
+	private int age;
 	
-//Constructor
+// Constructor
+	Pet(String animal, String name, int age) {
+            setAnimal(animal);
+            setName(name);
+            setAge(age);
+	}
+	
+// Setters     
+      public void setAnimal(String newanimal ){
+		this.animal = newanimal;
+	}
+      
+	public void setName(String newname) {
+		this.name = newname;
+	}
 
-	Pet(String animal, String name, int age){
-	this.animal = animal;
-	this.name = name;
-	this.age = age;
-		
-	}
-	
-	
-	public void setAnimal(String animal)
-	{
-		this.animal = animal;
+	public void setAge(int newage) {
+		this.age = newage;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
-	}
 
 // Getters
 	public String getName() {
@@ -33,30 +35,23 @@ class Pet {
 	}
 	
 	public int getAge() {
-		return age;
+		return this.age;
 	}
-	
-}
-
-public class PetTest {
-
-public static void main(String [] args) {
-
-Pet dog = new Pet("dog", "Fluffy", 10);
-Pet cat = new Pet("cat", "Cottonball", 3);
-Pet bird = new Pet("bird", "Toots", 5);
-
-System.out.println("I have a pet " + dog.animal + " and his name is " + dog.name + ". He is " + dog.age + " years old!");
-
-
-System.out.println("I have a pet " + cat.animal + " and his name is " + cat.name + ". He is " + cat.age + " years old!");
-
-
-System.out.println("I have a pet " + bird.animal + " and his name is " + bird.name + ". He is " + bird.age + " years old!");
-
-
-
 }
 
 
+
+
+public class Main {
+
+	public static void main(String [] args) {
+
+		Pet dog = new Pet("dog", "Filip", 10);
+		Pet cat = new Pet("cat", "Puddin", 3);
+		Pet bird = new Pet("bird", "Donut", 5);
+
+		System.out.println("I have a pet " + dog.getAnimal() + " and his name is " + dog.getName() + ". He is " + dog.getAge() + " years old!");
+		System.out.println("I have a pet " + cat.getAnimal() + " and her name is " + cat.getName() + ". She is " + cat.getAge() + " years old!");
+		System.out.println("I have a pet " + bird.getAnimal() + " and her name is " + bird.getName() + ". She is " + bird.getAge() + " years old!");
+	}
 }
