@@ -1,0 +1,44 @@
+		this.animal = animal;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+// Getters
+	public String getName() {
+		return this.name;
+	}
+
+	public String getAnimal() {
+		return this.animal;
+	}
+	
+	public int getAge() {
+		return age;
+	}
+	
+}
+
+public class PetTest {
+
+public static void main(String [] args) {
+
+Pet dog = new Pet("dog", "Fluffy", 10);
+Pet cat = new Pet("cat", "Cottonball", 3);
+Pet bird = new Pet("bird", "Toots", 5);
+
+System.out.println("I have a pet " + dog.animal + " and his name is " + dog.name + ". He is " + dog.age + " years old!");
+
+
+System.out.println("I have a pet " + cat.animal + " and his name is " + cat.name + ". He is " + cat.age + " years old!");
+
+
+System.out.println("I have a pet " + bird.animal + " and his name is " + bird.name + ". He is " + bird.age + " years old!");
+
+
+
+}
+
+
+}
