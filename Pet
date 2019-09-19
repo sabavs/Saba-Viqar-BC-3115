@@ -1,3 +1,21 @@
+class Pet {
+
+	String animal;
+	String name;
+	int age;
+	
+//Constructor
+
+	Pet(String animal, String name, int age){
+	this.animal = animal;
+	this.name = name;
+	this.age = age;
+		
+	}
+	
+	
+	public void setAnimal(String animal)
+	{
 		this.animal = animal;
 	}
 
