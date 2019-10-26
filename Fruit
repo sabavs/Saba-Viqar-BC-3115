@@ -38,3 +38,67 @@ class Orange extends Fruit{
         }
     }
 }
+
+
+/* Part 2***********************************************************************/
+
+public class Shape{
+    void draw(){
+        System.out.println("Drawing Shape");
+    }
+    
+    void erase(){
+        System.out.println("Erasing Shape");
+    }
+}
+
+
+public class Circle extends Shape{
+   void draw(){
+        System.out.println("Drawing Circle");
+    }
+    
+    void erase(){
+        System.out.println("Erasing Circle");
+    } 
+    
+}
+
+public class Triangle extends Shape{
+   void draw(){
+        System.out.println("Drawing Triangle");
+    }
+    
+    void erase(){
+        System.out.println("Erasing Triangle");
+    } 
+    
+}
+
+public class Square extends Shape{
+   void draw(){
+        System.out.println("Drawing Square");
+    }
+    
+    void erase(){
+        System.out.println("Erasing Square");
+    } 
+    
+}
+
+public class ShapeDemo{
+    public static void main(String[] args){
+        Shape c = new Circle();
+        Shape t = new Triangle();
+        Shape s = new Square();
+        
+        c.draw();
+        c.erase();
+        
+        t.draw();
+        t.erase();
+        
+        s.draw();
+        s.erase();
+    }
+}
