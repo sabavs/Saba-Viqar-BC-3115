@@ -3,9 +3,10 @@ public class Fruit{
     String taste=good;
     double size;
     
-    Fruit(String name, String taste){
-      System.out.println(name + " tastes " + taste " + ".");  
-    }
+    Fruit(String name, String taste) {
+		this.name = name;
+		this.taste = taste;
+	}
     
     public void eat(){
         System.out.println(name + " tastes " + taste + ".");
