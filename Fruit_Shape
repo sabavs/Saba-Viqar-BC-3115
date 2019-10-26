@@ -1,42 +1,41 @@
-public class Fruit{
-    String name=Fruit;
-    String taste=good;
-    double size;
-    
-    Fruit(String name, String taste) {
+class Fruit {
+	String name;
+	String taste;
+	double size;
+	public void eat() {
+	
+    System.out.println(name + "tastes " + taste + ".");
+	}
+	
+	Fruit(String name, String taste) {
 		this.name = name;
 		this.taste = taste;
 	}
+
+}
+
+class Orange extends Fruit {
     
-    public void eat(){
-        System.out.println(name + " tastes " + taste + ".");
-    }
+    Orange(String taste) {
+		super("Orange", taste);
+	}
+	
+	public void eat() {
+		System.out.println("Orange tastes " + this.taste + ".");
+	}
+	
 }
 
-class Apple extends Fruit{
-    public static void main(String[] args){
-        Apple a = new Apple();
-        
-        a.name = Apple;
-        a.taste = crunchy;
-        
-        void a.eat(){
-            System.out.println(a.name + " tastes " + taste + ".");
-        }
-    }
-}
+public class Main {
+	public static void main(String[] args) {
+		Orange o = new Orange("funky");
+		Apple a = new Apple("like baby's dirty diapers");
 
-class Orange extends Fruit{
-    public static void main(String[] args){
-        Orange o = new Orange();
-        
-        o.name = Orange;
-        o.taste = sweet;
-        
-        o.eat(){
-            System.out.println(o.name + " tastes " + taste + ".")
-        }
-    }
+		System.out.println("Program starting...");
+		o.eat();
+		a.eat();
+		System.out.println("Program ending...");
+	}
 }
 
 
