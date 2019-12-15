@@ -1,0 +1,119 @@
+import javafx.application.Application;
+        import javafx.geometry.Insets;
+        import javafx.geometry.Pos;
+        import javafx.scene.Scene;
+        import javafx.scene.control.*;
+        import javafx.scene.layout.GridPane;
+        import javafx.scene.layout.HBox;
+        import javafx.stage.Stage;
+
+        import java.text.NumberFormat;
+
+public class Calculator extends Application {
+    private RadioButton smallRB;
+    private RadioButton mediumRB;
+    private RadioButton ToppingsRB;
+    private Label msg1;
+    private String INITIAL_VALUE = "0";
+
+    //For currency formatting
+    NumberFormat currency = NumberFormat.getCurrencyInstance();
+
+    @Override // Override the start method in the Application class
+    public void start(Stage primaryStage) {
+        // Create a pane to display the menu
+        // Pane pane = new Pane();
+
+        /* Using GridPane instead of Pane */
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.TOP_CENTER);
+        grid.setPadding(new Insets(25, 25, 25, 25));
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        // Create a scene and place it in the stage
+        Scene scene = new Scene(grid, 300, 400);
+        primaryStage.setTitle("Split Bill Calculator"); // Set the stage title
+
+        grid.add(new Label("Bill: "), 0, 0);
+        TextField bill = new TextField();
+        grid.add(bill, 1, 0, 2, 1);
+
+        grid.add(new Label("Sales Tax: "), 0, 1);
+        TextField tax = new TextField();
+        grid.add(tax, 1, 1, 2, 1);
+
+        grid.add(new Label("Tip Percent: "), 0, 2);
+        ComboBox<String> tip = new ComboBox<String>();
+        tip.getItems().addAll("5", "10", "15", "20", "25", "30");
+        grid.add(tip, 1, 2, 2, 1);
+
+        grid.add(new Label("Split: "), 0, 3);
+        Spinner<Integer> split = new Spinner<Integer>();
+        split.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10000, Integer.parseInt(INITIAL_VALUE)));
+        split.setEditable(true);
+        grid.add(split, 1, 3, 2, 1);
+
+        // Message to user
+        msg1 = new Label();
+        msg1.setWrapText(true);
+        msg1.setPrefWidth(300);
+        msg1.setWrapText(true);
+        grid.add(msg1, 0, 4, 2, 3);
+
+        Button calculateBtn = new Button();
+        calculateBtn.setText("Calculate");
+        calculateBtn.setOnAction(event -> calculateButtonClicked(bill, tax, tip.getValue(), split.getEditor().textProperty().get()));
+
+        Button clearBtn = new Button();
+        clearBtn.setText("Clear");
+        clearBtn.setOnAction(event -> clearButtonClicked(bill, tax, tip, split));
+
+        Button exitBtn = new Button();
+        exitBtn.setText("Exit");
+        exitBtn.setOnAction(event -> primaryStage.close());
+
+        HBox hBox = new HBox(15);
+        hBox.getChildren().add(calculateBtn);
+        hBox.getChildren().add(clearBtn);
+        hBox.getChildren().add(exitBtn);
+        hBox.setAlignment(Pos.CENTER);
+        grid.add(hBox, 0, 7, 2, 1);
+
+        // Finally, display
+        primaryStage.setScene(scene); // Place the scene in the stage
+        primaryStage.show(); // Display the stage
+    }
+
+    private void calculateButtonClicked(TextField bill, TextField tax, String tip, String split) {
+        if (bill.getText().isEmpty() || tax.getText().isEmpty()) {
+            msg1.setText("Enter a value for each");
+        } else if (split.equals("0")) {
+            msg1.setText("Arithmetic is invalid");
+        } else {
+            Float billValue = Float.parseFloat(bill.getText());
+            Float taxValue = Float.parseFloat(tax.getText()) / 100;
+            Float tipValue = Float.parseFloat(tip) / 100;
+            Integer splitValue = Integer.parseInt(split);
+            Float taxTotal = billValue * taxValue;
+            Float tipTotal = billValue * tipValue;
+            Float finalAmount = billValue + taxTotal + tipTotal;
+            Float splitAmount = finalAmount / splitValue;
+
+            String finalString = String.format("Your final amount: $%.02f, and split %d ways is: $%.02f", finalAmount, splitValue, splitAmount);
+            msg1.setText(finalString);
+        }
+    }
+
+    private void clearButtonClicked(TextField bill, TextField tax, ComboBox tip, Spinner split) {
+        bill.clear();
+        tax.clear();
+        tip.getEditor().clear();
+        split.getEditor().textProperty().setValue(INITIAL_VALUE);
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+
