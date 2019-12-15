@@ -1,0 +1,115 @@
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+
+import java.text.NumberFormat;
+
+public class Calculator extends Application {
+    private RadioButton smallRB;
+    private RadioButton mediumRB;
+    private RadioButton ToppingsRB;
+    Label msg1;
+
+    //For currency formatting
+    NumberFormat currency = NumberFormat.getCurrencyInstance();
+
+    @Override // Override the start method in the Application class
+    public void start(Stage primaryStage) {
+        // Create a pane to display the menu
+        // Pane pane = new Pane();
+
+        /* Using GridPane instead of Pane */
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.TOP_CENTER);
+        grid.setPadding(new Insets(25, 25, 25, 25));
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        // Create a scene and place it in the stage
+        Scene scene = new Scene(grid, 300, 400);
+        primaryStage.setTitle("Split Bill Calculator"); // Set the stage title
+
+        grid.add(new Label("Bill: "), 0, 0);
+        TextField bill = new TextField();
+        grid.add(bill, 1, 0, 2, 1);
+
+        grid.add(new Label("Sales Tax: "), 0, 1);
+        TextField tax = new TextField();
+        grid.add(tax, 1, 1, 2, 1);
+
+        grid.add(new Label("Split: "), 0, 2);
+        TextField split = new TextField();
+        grid.add(split, 1, 2, 2, 1);
+
+        // Message to user
+        msg1 = new Label();
+        msg1.setWrapText(true);
+        msg1.setPrefWidth(300);
+        msg1.setWrapText(true);
+        grid.add(msg1, 0, 3, 2, 3);
+
+        Button calculateBtn = new Button();
+        calculateBtn.setText("Calculate");
+        calculateBtn.setOnAction(event -> calculateButtonClicked(bill, tax, split));
+
+        Button clearBtn = new Button();
+        clearBtn.setText("Clear");
+        clearBtn.setOnAction(event -> clearButtonClicked(bill, tax, split));
+
+        Button exitBtn = new Button();
+        exitBtn.setText("Exit");
+        exitBtn.setOnAction(event -> primaryStage.close());
+
+        HBox hBox = new HBox(15);
+        hBox.getChildren().add(calculateBtn);
+        hBox.getChildren().add(clearBtn);
+        hBox.getChildren().add(exitBtn);
+        hBox.setAlignment(Pos.CENTER);
+        grid.add(hBox, 0, 6, 2, 1);
+
+        // Finally, display
+        primaryStage.setScene(scene); // Place the scene in the stage
+        primaryStage.show(); // Display the stage
+    }
+
+    private void calculateButtonClicked(TextField bill, TextField tax, TextField split) {
+        if (bill.getText().isEmpty() || tax.getText().isEmpty() || split.getText().isEmpty()) {
+            msg1.setText("Enter a value for each");
+        } else if (split.getText().equals("0")) {
+            msg1.setText("Arithmetic is invalid");
+        } else {
+            try {
+                Float billValue = Float.parseFloat(bill.getText());
+                Float taxValue = Float.parseFloat(tax.getText()) / 100;
+                Integer splitValue = Integer.parseInt(split.getText());
+
+                Float finalAmount = billValue + taxValue * billValue;
+                Float splitAmount = finalAmount / splitValue;
+
+                String finalString = String.format("Your final amount: $%.02f, and split %d ways is: $%.02f", finalAmount, splitValue, splitAmount);
+                msg1.setText(finalString);
+            } catch (Exception e) {
+                msg1.setText("Arithmetic is invalid");
+            }
+        }
+    }
+
+    private void clearButtonClicked(TextField bill, TextField tax, TextField split) {
+        bill.clear();
+        tax.clear();
+        split.clear();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+
